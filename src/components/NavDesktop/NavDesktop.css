@@ -1,0 +1,18 @@
+/* className="bg-[#F8F9FACC] w-full pl-[16px] py-[13px] rounded-bl-2xl rounded-tl-2xl text-[#1576D6] font-[500] text-[20px]"
+className="w-full font-[500] pl-[16px] text-[#25292C] text-[20px]" */
+.link {
+  width: 100%;
+  font-weight: 500;
+  padding-left: 16px;
+  color: #25292c;
+  font-size: 20px;
+}
+.link.active {
+  background-color: #f8f9facc;
+  width: 100%;
+  padding-left: 16px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-radius: 20px 0 0 20px;
+  color: #1576D6;
+}

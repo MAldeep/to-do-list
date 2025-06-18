@@ -21,7 +21,22 @@ export const newTask = create(
   )
 );
 
-export const taskStatus = create((set) => ({
-  initial: false,
-  checkTask: () => set((state) => ({ initial: !state.initial })),
+// export const taskStatus = create((set) => ({
+//   initial: false,
+//   checkTask: () => set((state) => ({ initial: !state.initial })),
+// }));
+export const taskStatus = create((set, get) => ({
+  checked: {},
+  toggleTask: (index) =>
+    set((state) => ({
+      checked: {
+        ...state.checked,
+        [index]: !state.checked[index],
+      },
+    })),
+  getCheckedTasks: () => {
+    const { checked } = get();
+    const { tasks } = newTask.getState();
+    return tasks.filter((item, index) => checked[index]);
+  },
 }));

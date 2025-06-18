@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homes from "./pages/Homes";
+import Completed from "./pages/Completed";
 
 export default function App() {
   return (
@@ -8,7 +9,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Homes/>}/>
           <Route path="/todo" element={<h1>to-do-list</h1>}/>
-          <Route path="/completed" element={<h1>completed tasks</h1>}/>
+          <Route path="/completed" element={<Completed/>}/>
         </Routes>
       </BrowserRouter>
     </div>

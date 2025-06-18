@@ -3,7 +3,7 @@ import { taskStatus } from "../store";
 import { MdDelete } from "react-icons/md";
 
 export default function SingleTask({ tasks , removeTask }) {
-  const { initial, checkTask } = taskStatus();
+  const { checked, toggleTask } = taskStatus();
   return (
     <ul className="flex flex-col gap-[20px]">
       {tasks.map((task, index) => (
@@ -13,15 +13,15 @@ export default function SingleTask({ tasks , removeTask }) {
         >
           <p className="font-[500] text-[18px] text-[#25292C]">{task}</p>
           <div className="flex items-center gap-[15px]">
-            <MdDelete className="text-[30px] text-red-600" onClick={() => removeTask(index)}/>
-            {initial ? (
+            <MdDelete className="text-[30px] text-red-600 cursor-pointer" onClick={() => removeTask(index)}/>
+            {checked[index] ? (
               <FaCheckCircle
-                onClick={checkTask}
+                onClick={() => toggleTask(index)}
                 className="text-[30px] text-[#00B4D8]"
               />
             ) : (
               <FaRegCheckCircle
-                onClick={checkTask}
+                onClick={() => toggleTask(index)}
                 className="text-[30px] text-[#00B4D8]"
               />
             )}
