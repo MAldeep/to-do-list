@@ -1,10 +1,8 @@
 import AddNewTask from "../components/AddNewTask";
 import AddNewTaskForm from "../components/AddNewTaskForm";
 import NavDesktop from "../components/NavDesktop/NavDesktop";
-
-import SingleTask from "../components/singleTask";
 import { newTask, UseAddNewTaskForm } from "../store";
-
+import SingleTask from "../components/SingleTask"
 export default function Homes() {
   const { initial } = UseAddNewTaskForm();
   const { tasks, addNew, removeTask } = newTask();
