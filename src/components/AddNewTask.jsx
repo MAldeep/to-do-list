@@ -1,8 +1,10 @@
 import { FaPlus } from "react-icons/fa";
-import { UseAddNewTaskForm } from "../store";
+import { useAddNewTaskForm } from "../store";
+
+
 
 export default function AddNewTask() {
-  const { showForm } = UseAddNewTaskForm();
+  const { showForm } = useAddNewTaskForm();
   return (
     <button
       className="py-[12px] px-[16px] border-[#00B4D8] border-[1px] rounded-2xl flex justify-between items-center gap-[19px] hover:bg-[#00b4d815] cursor-pointer"

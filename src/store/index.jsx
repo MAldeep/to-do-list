@@ -1,18 +1,25 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { v4 as uuidv4 } from "uuid";
 
-export const UseAddNewTaskForm = create((set) => ({
+// Form visibility store
+export const useAddNewTaskForm = create((set) => ({
   initial: false,
   showForm: () => set((state) => ({ initial: !state.initial })),
 }));
-export const newTask = create(
+
+// Main task store
+export const useTaskStore = create(
   persist(
     (set) => ({
       tasks: [],
-      addNew: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
-      removeTask: (index) =>
+      addNew: (task) =>
         set((state) => ({
-          tasks: state.tasks.filter((item, i) => i !== index),
+          tasks: [...state.tasks, { ...task, id: uuidv4() }],
+        })),
+      removeTask: (id) =>
+        set((state) => ({
+          tasks: state.tasks.filter((task) => task.id !== id),
         })),
     }),
     {
@@ -21,25 +28,26 @@ export const newTask = create(
   )
 );
 
-export const taskStatus = create(
+// Task status store
+export const useTaskStatusStore = create(
   persist(
-      (set, get) => ({
-  checked: {},
-  toggleTask: (index) =>
-    set((state) => ({
-      checked: {
-        ...state.checked,
-        [index]: !state.checked[index],
+    (set, get) => ({
+      checkedTasks: {},
+      toggleTask: (id) =>
+        set((state) => ({
+          checkedTasks: {
+            ...state.checkedTasks,
+            [id]: !state.checkedTasks[id],
+          },
+        })),
+      getCheckedTasks: () => {
+        const { checkedTasks } = get();
+        const { tasks } = useTaskStore.getState();
+        return tasks.filter((task) => checkedTasks[task.id]);
       },
-    })),
-  getCheckedTasks: () => {
-    const { checked } = get();
-    const { tasks } = newTask.getState();
-    return tasks.filter((item, index) => checked[index]);
-  },
-})
+    }),
+    {
+      name: "check-state",
+    }
   )
-  ,{
-  name : "check-state"
-}
 );
