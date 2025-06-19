@@ -40,11 +40,18 @@ export const useTaskStatusStore = create(
             [id]: !state.checkedTasks[id],
           },
         })),
+        // i will use this function in completed tasks
       getCheckedTasks: () => {
         const { checkedTasks } = get();
         const { tasks } = useTaskStore.getState();
         return tasks.filter((task) => checkedTasks[task.id]);
       },
+      // i will use this function in to-do-list 
+      getUncheckedTasks : () => {
+        const {checkedTasks} = get();
+        const {tasks} = useTaskStore.getState();
+        return tasks.filter((task) => !checkedTasks[task.id]);
+      }
     }),
     {
       name: "check-state",
